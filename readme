@@ -1,0 +1,60 @@
+// Function to fetch data and process it
+async function fetchDataAndProcess() {
+    try {
+        // Fetch the JSON data from the URL
+        const response = await fetch("https://qh-charts.corp.hertshtengroup.com/api/get-ohlc-data/?products=BAH24-H25&timeIntervals=1D");
+        
+        // Check if response is successful
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        
+        // Parse response as text
+        const data = await response.text();
+
+        // Replace "NaN" with "0" in the JSON data
+        const replacedData = data.replace(/NaN/g, "0");
+        
+        // Parse the modified JSON string back to array of arrays format
+        const parsedData = JSON.parse("[" + replacedData + "]");
+        console.log(parsedData);
+
+        // Extract High and Open data for the chart
+        const fetch_Data = parsedData[0]['BAH24-H25'].DATA.reduce((acc, entry) => {
+            // Convert Unix timestamp to milliseconds
+            const timestamp = entry[0] * 1000;
+            // Create a new Date object from the timestamp
+            const date = new Date(timestamp);
+            // Format the date as "dd/mm/yyyy"
+            const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+            
+            // Check if the date falls within the desired range (15/01/2023 to 30/11/2024)
+            const startDate = new Date('01/15/2021');
+            const endDate = new Date('11/30/2024');
+            if (date >= startDate && date <= endDate) {
+                acc.push({
+                    Date: formattedDate,  // Date value
+                    Open: entry[1], // Open value
+                    High: entry[2], // High value
+                    Low: entry[3], // Low value
+                    Close: entry[4], // Close value
+                   
+                });
+            }
+            return acc;
+        }, []);
+        
+        // Reverse the order of fetch_Data array
+        fetch_Data.reverse();
+        
+        // Store fetched data in global array
+        globalData = fetch_Data;
+
+        // Return the processed data
+        return globalData;
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+        throw error; // Rethrow the error
+    }
+}
+

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FUTURES FIRST</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/png" href="/assets/candlestick.png" />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="assets/logo.svg" alt="Logo" />
+      </div>
+
+      <nav>
+        <ul>
+          <li><input type="text" id="itmInput" placeholder="ITM" /></li>
+          <li>
+            <input type="text" id="productInput" placeholder="PRODUCT CODE" />
+          </li>
+        </ul>
+      </nav>
+    </header>
+    
+
+    <main>
+      <div class="options-bar">
+        <div class="date-range-selector-div">
+          <label for="start_date">Start Date:</label>
+          <input
+          type="date"
+            id="start_date"
+            name="start_date"
+            placeholder="MM/DD/YYYY"
+            pattern="\d{1,2}/\d{1,2}/\d{4}"
+            title="Enter a date in the format DD/MM/YYYY"
+          />
+
+          <label for="end_date">End Date:</label>
+          <input
+          type="date"
+            id="end_date"
+            name="end_date"
+            placeholder="MM/DD/YYYY"
+            pattern="\d{1,2}/\d{1,2}/\d{4}"
+            title="Enter a date in the format DD/MM/YYYY"
+          />
+        </div>
+
+        <div class="y-selector-div">
+          <label for="y-axis">Y Axis:</label>
+          <select id="y-axis" name="y-axis">
+            
+            <option value="DCW">DCW</option>
+            <option value="ATR">ATR</option>
+            <option value="DCW_ATR">DCW_ATR</option>
+            <option value="Change">Change</option>
+            <option value="Change/ATR">Change/ATR</option>
+            
+          </select>
+        </div>
+        <div class="x-selector-div">
+          <label for="x-axis">X Axis:</label>
+          <select id="x-axis" name="x-axis">
+            
+            <option value="Time">Time</option>
+            <option value="DCW">DCW</option>
+            <option value="ATR">ATR</option>
+            <option value="DCW_ATR">DCW_ATR</option>
+            
+          </select>
+        </div>
+        
+        <div class="chart-selector-div">
+          <label for="select-charts">Select Chart:</label>
+          <select id="select-charts" name="select-charts">
+            <option value="Scatter Plot">Scatter Plot</option>
+            <option value="Bar Chart">Bar Chart</option>
+            <option value="Line Chart">Line Chart</option>
+            <option value="Pie Chart">Pie Chart</option>
+            
+          </select>
+        </div>
+        <ul class="input-container">
+          <label for="DCW_period">DCW_Period:</label>
+          <input type="text" id="DCW_period" placeholder="" />
+        </ul>
+        <ul class="input-container">
+          
+          <label for="ATR_period">ATR_Period:</label>
+          <input type="text" id="ATR_period" placeholder="" />
+          
+        </ul>
+
+        
+      
+
+        <button type="button" id="add_chart">ADD</button>
+        <button type="button" id="Reset_last">RESET ALL</button>
+       
+        
+      </div>
+      
+      <div class="charts">
+        <div class="chart-container" data-id="1">
+            <div id="C1"></div>
+            <div class="cross" onclick="assignVariable(1)"></div>
+        </div>
+        <div class="chart-container" data-id="2">
+            <div id="C2"></div>
+            <div class="cross" onclick="assignVariable(2)"></div>
+        </div>
+        <div class="chart-container" data-id="3">
+            <div id="C3"></div>
+            <div class="cross" onclick="assignVariable(3)"></div>
+        </div>
+        <div class="chart-container" data-id="4">
+            <div id="C4"></div>
+            <div class="cross" onclick="assignVariable(4)"></div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p id="demo">&copy; 2024 Futures First</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <script src="autocomplete.js"></script>
+    <script src="value_calci.js"></script>
+    <script src="script.js"></script>
+    <script src="call_func.js"></script>
+    <script src="fetch_OHCL.js"></script>
+    <script src="fetch_data_for_ATR.js"></script>
+    <!-- <script src="fetch_data_for_DCW.js"></script> -->
+    <script src="fetch_data_DCW.js"></script>
+    
+    
+  </body>
+</html>

@@ -1,0 +1,135 @@
+// adding event listener to the button
+document
+  .getElementById("add-chart-button")
+  .addEventListener("click", function () {
+    const selectedYear = document.getElementById("year-input").value;
+    const selectedXAxis = document.getElementById("x-axis-select").value;
+    const selectedYAxis = document.getElementById("y-axis-select").value;
+    const selectedChartType = document.getElementById("chart-select").value;
+    const selectedSpread = document.getElementById("spread-select").value;
+ 
+    createChart(
+      selectedYear,
+      selectedXAxis,
+      selectedYAxis,
+      selectedChartType,
+      selectedSpread
+    );
+  });
+ 
+document.getElementById("code-button").addEventListener("click", function () {
+  const id = document.getElementById("id-input").value;
+  const productCode = document.getElementById("product-code-input").value;
+ 
+  console.log(id, productCode);
+});
+ 
+function createChart(
+  selectedYear,
+  selectedXAxis,
+  selectedYAxis,
+  selectedChartType,
+  selectedSpread
+) {
+  // high low chart
+  fetch("highlow.json")
+    .then((response) => response.json())
+    .then((jsonData) => {
+      // Extract data for chart
+      const labels2 = jsonData.map((data) => data.Timestamp);
+      const opens = jsonData.map((data) => data.Open);
+      const highs = jsonData.map((data) => data.High);
+      const lows = jsonData.map((data) => data.Low);
+      const closes = jsonData.map((data) => data.Close);
+ 
+      // Create the chart
+      const ctx2 = document.getElementById("myChart1").getContext("2d");
+      const myChart = new Chart(ctx2, {
+        type: "bar",
+        data: {
+          labels: labels2,
+          datasets: [
+            {
+              label: "Open",
+              data: opens,
+              backgroundColor: "rgba(255, 99, 132, 0.2)",
+              borderColor: "rgba(255, 99, 132, 1)",
+              borderWidth: 1,
+            },
+            {
+              label: "High",
+              data: highs,
+              backgroundColor: "rgba(54, 162, 235, 0.2)",
+              borderColor: "rgba(54, 162, 235, 1)",
+              borderWidth: 1,
+            },
+            {
+              label: "Low",
+              data: lows,
+              backgroundColor: "rgba(255, 206, 86, 0.2)",
+              borderColor: "rgba(255, 206, 86, 1)",
+              borderWidth: 1,
+            },
+            {
+              label: "Close",
+              data: closes,
+              backgroundColor: "rgba(75, 192, 192, 0.2)",
+              borderColor: "rgba(75, 192, 192, 1)",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    })
+    .catch((error) => console.error("Error fetching JSON:", error));
+ 
+  fetch("pl.json")
+    .then((response) => response.json())
+    .then((jsonData2) => {
+      // Extract data for chart
+      const labels = jsonData2.map((data) => data.time);
+      const plData = jsonData2.map((data) => data.pl.replace(",", ""));
+      const rtData = jsonData2.map((data) => data.RT.replace(",", ""));
+ 
+      // Create the chart
+      const ctx = document.getElementById("myChart2").getContext("2d");
+      const myChart2 = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "Profit/Loss",
+              data: plData,
+              fill: false,
+              borderColor: "rgba(255, 99, 132, 1)",
+              borderWidth: 1,
+            },
+            {
+              label: "RT",
+              data: rtData,
+              fill: false,
+              borderColor: "rgba(54, 162, 235, 1)",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    })
+    .catch((error) => console.error("Error fetching JSON:", error));
+}
+ 

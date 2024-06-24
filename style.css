@@ -1,0 +1,267 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: rgb(19, 33, 70);
+  padding: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  width: 10.5rem;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 31.25rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+nav li input {
+  list-style: none;
+  padding: 0.625rem;
+  border: 0.0625rem solid #ccc;
+  border-radius: 0.25rem;
+  width: 12.5rem;
+}
+
+main {
+  padding: 1 rem;
+}
+
+.options-bar {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+  border: 0.0625rem solid #ddd;
+  border-radius: 0.25rem;
+  padding: 0.3125rem 1rem;
+  background-color: #dcffef;
+  justify-content: space-between;
+  margin-left: 1%;
+  margin-right: 1% ;
+}
+
+.sidebar {
+  width: 5%;
+  height: 70vh;
+  background-color: rgb(22, 38, 82); /* Sidebar background color */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed; /* Keep the sidebar fixed */
+  left: 0; /* Position the sidebar to the left */
+  top: 30; /* Adjust the top position to be below the options bar */
+  border-radius: 0 10px 10px 0;
+}
+
+.sidebar input[type="text"] {
+  display: block;
+  margin-bottom: 10px;
+  width: 80%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-right: 0.5rem;
+}
+
+select {
+  border: 0.0625rem solid #ccc;
+  border-radius: 0.25rem;
+  padding: 0.3125rem 0.5rem;
+  font-size: 1rem;
+  background-color: #fff;
+  cursor: pointer;
+}
+.sidebar h2 {
+  color: #f7f7f7; /* Set the color of the heading */
+  font-size: 1rem; /* Adjust the font size */
+  margin-bottom: 1rem; /* Add spacing between the heading and buttons */
+}
+
+
+
+
+.charts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 0.75rem;
+  margin: 1%;
+}
+.chart-container {
+  position: relative;
+  background-color: #fff6f6;
+  padding: 1.25rem;
+  border: 0.0625rem solid #ccc;
+  border-radius: 0.25rem;
+  height: 450px; /* Ensure this is set to maintain the height of the containers */
+}
+.cross {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 5px;
+  height: 5px;
+  cursor: pointer;
+}
+.cross::before, .cross::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  background-color: rgb(243, 150, 150);
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+.cross::before {
+  transform: translateY(-50%) rotate(45deg);
+}
+.cross::after {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+footer {
+  background-color: #ffffff;
+  padding: 0.75 rem;
+  text-align: center;
+}
+#add_chart {
+  background-color: green; /* Set background color to green */
+  color: white; /* Set text color to white */
+  padding: 12px 20px; /* Add padding */
+  border: none; /* Remove border */
+  cursor: pointer; /* Add pointer cursor */
+  border-radius: 5px; /* Add border radius */
+}
+
+#Reset_last {
+  background-color: red; /* Set background color to red */
+  color: white; /* Set text color to white */
+  padding: 12px 20px; /* Add padding */
+  border: none; /* Remove border */
+  cursor: pointer; /* Add pointer cursor */
+  border-radius: 5px; /* Add border radius */
+}
+
+/* Hover effect */
+#add_chart:hover, #Reset_last:hover {
+  opacity: 0.8; /* Reduce opacity on hover */
+}
+.year-selector-div label {
+  margin-right: 1rem;
+}
+
+.year-selector-div input {
+  padding: 0.4rem;
+  border: none;
+  border-radius: 0.25rem;
+  outline: none;
+  font-size: inherit;
+}
+
+.date-range-selector-div {
+  margin-bottom: 2px;
+}
+
+.date-range-selector-div label {
+  display: inline-block;
+  width: 80px; /* Adjust as needed */
+  margin-right: 10px;
+}
+
+.date-range-selector-div input[type="text"] {
+  width: 150px; /* Adjust as needed */
+  padding: 6.7px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+/* Optional: Style for invalid input */
+.date-range-selector-div input:invalid {
+  border-color: red;
+}
+
+.autocomplete-suggestions {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid rgb(22, 38, 82);
+  border-radius: 5px; /* Rounded border */
+  width: 25ch; /* Fixed width of 10 characters */
+  margin-top: 2px; /* Adjust as needed */
+  overflow-y: auto;
+  max-height: 150px; /* Adjust as needed */
+  z-index: 999; /* Set a high z-index value to bring it to the front */
+}
+
+.suggestion {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestion:hover {
+  background-color: #f0f0f0;
+
+}
+
+
+
+.suggestion-dropdown {
+  position: absolute;
+  z-index: 999;
+}
+
+
+
+/* Optional: Style for invalid input */
+
+
+.autocomplete-suggestions1 {
+  position: absolute;
+  background-color: #fff;
+  border: 0px solid rgb(167, 189, 252);
+  border-radius: 5px; /* Rounded border */
+  width: 9ch; /* Fixed width of 10 characters */
+  margin-top: 2px; /* Adjust as needed */
+  overflow-y: auto;
+  max-height: 150px; /* Adjust as needed */
+  z-index: 999; /* Set a high z-index value to bring it to the front */
+}
+
+#DCW_period {
+  width: 50px;
+  height: 25px;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 0.25rem;
+}
+
+#ATR_period {
+  width: 50px;
+  height: 25px;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 0.25rem;
+}
+
+input#itmInput {
+  visibility: hidden;
+}
